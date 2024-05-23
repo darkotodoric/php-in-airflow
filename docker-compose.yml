@@ -1,0 +1,61 @@
+services:
+  postgresql:
+    image: bitnami/postgresql:16
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_DATABASE=bitnami_airflow
+      - POSTGRESQL_USERNAME=bn_airflow
+      - POSTGRESQL_PASSWORD=bitnami1
+      - ALLOW_EMPTY_PASSWORD=no
+
+  redis:
+    image: bitnami/redis:7.0
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
+  airflow-scheduler:
+    image: bitnami/airflow-scheduler:2.9.1
+    volumes:
+      - './dags:/opt/bitnami/airflow/dags'
+    environment:
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=airflow
+      - AIRFLOW_LOAD_EXAMPLES=no
+
+  airflow-worker:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - './dags:/opt/bitnami/airflow/dags'
+      - './:/opt/bitnami/airflow/project'
+    environment:
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=airflow
+
+  airflow:
+    image: bitnami/airflow:2.9.1
+    environment:
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_USERNAME=airflow
+      - AIRFLOW_PASSWORD=airflow
+    ports: ['8080:8080']
+
+volumes:
+  postgresql_data: {}
+  redis_data: {}
