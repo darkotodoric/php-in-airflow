@@ -1,6 +1,6 @@
 <br>
 
-![airflow-logo.png](airflow-logo.png)
+![airflow-logo.png](https://raw.githubusercontent.com/darkotodoric/php-in-airflow/65146f4/airflow-logo.png)
 <br><br>
 
 # Configuring PHP Inside AirFlow
