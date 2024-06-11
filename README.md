@@ -18,8 +18,8 @@ This repository provides examples and instructions for setting up PHP within the
 
 ## Articles
  - https://medium.com/@darkotodoric/how-to-configure-php-in-airflow-877e1cd54ebb
- - https://dev.to/darkotodoric/understanding-mysql-query-optimizer-countid-vs-count-2ed5
- - https://www.linkedin.com/pulse/how-configure-php-airflow-darko-todori%2525C4%252587-rtxfc/?trackingId=bQHiFIuHQzGO5cRK4w4Kuw%3D%3D
+ - https://dev.to/darkotodoric/how-to-configure-php-in-airflow-5d9i
+ - https://www.linkedin.com/pulse/how-configure-php-airflow-darko-todori%2525C4%252587-rtxfc/
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests to improve this project.
